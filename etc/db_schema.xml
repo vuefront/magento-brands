@@ -1,0 +1,32 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="vuefront_brands_brand">
+        <column name="brand_id" xsi:type="int" identity="true" nullable="false"/>
+        <column name="title" xsi:type="varchar" length="255" comment="Brand Title" nullable="true" />
+        <column name="description" xsi:type="text" nullable="true"/>
+        <column name="image" xsi:type="varchar" length="255" nullable="true"/>
+        <column name="keyword" xsi:type="varchar" length="100" nullable="true"/>
+        <column name="sort_order" xsi:type="int" nullable="false" default="0"/>
+        <column name="meta_title" xsi:type="varchar" length="255" nullable="false" default="" />
+        <column name="meta_description" xsi:type="text" nullable="false" />
+        <column name="meta_keywords" xsi:type="varchar" length="255" nullable="false" default="" />
+        <column name="date_added" xsi:type="timestamp" nullable="false" default="CURRENT_TIMESTAMP" comment="Date Added"/>
+        <column name="date_modified" xsi:type="timestamp" nullable="false" default="CURRENT_TIMESTAMP" comment="Date Modified"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="brand_id"/>
+        </constraint>
+     </table>
+    <table name="vuefront_brands_brand_product">
+        <column name="brand_id" xsi:type="int" nullable="false"/>
+        <column name="product_id" xsi:type="int" nullable="false" unsigned="true"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="brand_id" />
+            <column name="product_id"/>
+        </constraint>
+        <index referenceId="IDX_BRANDS_BRAND_PRODUCT_ID">
+            <column name="product_id"/>
+        </index>
+        <constraint referenceId="vuefront_brands_brand_product_foreign_product_id" xsi:type="foreign" column="product_id" referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint referenceId="vuefront_brands_brand_product_foreign_brand_id" xsi:type="foreign" column="brand_id" referenceTable="vuefront_brands_brand" referenceColumn="brand_id" onDelete="CASCADE"/>
+    </table>
+</schema>

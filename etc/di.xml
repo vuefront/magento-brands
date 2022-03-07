@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Vuefront\Brands\Api\BrandRepositoryInterface" type="Vuefront\Brands\Model\BrandRepository" />
+    <preference for="Vuefront\Brands\Api\Data\BrandInterface" type="Vuefront\Brands\Model\Brand" />
+
+    <type name="Vuefront\Brands\Model\ResourceModel\Brand\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">vuefront_brands_brand</argument>
+            <argument name="eventPrefix" xsi:type="string">vuefront_brands_brand_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">brand_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Vuefront\Brands\Model\ResourceModel\Brand</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="brand_listing_data_source" xsi:type="string">Vuefront\Brands\Model\ResourceModel\Brand\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="VuefrontBrandsBrandImageUploader" type="Vuefront\Brands\Model\Uploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="const">Vuefront\Brands\Model\Brand::BASE_TMP_PATH</argument>
+            <argument name="basePath" xsi:type="const">Vuefront\Brands\Model\Brand::BASE_PATH</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Vuefront\Brands\Controller\Adminhtml\Brand\Image\Upload">
+        <arguments>
+            <argument name="uploader" xsi:type="object">VuefrontBrandsBrandImageUploader</argument>
+        </arguments>
+    </type>
+    <type name="Vuefront\Brands\Model\UploaderPool">
+        <arguments>
+            <argument name="uploaders" xsi:type="array">
+                <item name="image-brand" xsi:type="string">VuefrontBrandsBrandImageUploader</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Vuefront\Brands\Model\Brand">
+        <arguments>
+            <argument name="uploaderPool" xsi:type="object">Vuefront\Brands\Model\UploaderPool</argument>
+        </arguments>
+    </type>
+</config>
