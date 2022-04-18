@@ -37,14 +37,14 @@ class BrandTree implements \Magento\Framework\Data\OptionSourceInterface
     {
         $this->options = [];
         if (count($this->options) == 0) {
-            $result = $this->_postCollectionFactory->create();
+            $result = $this->_brandCollectionFactory->create();
             $result->load();
             $i = 0;
-            foreach ($result->getItems() as $post) {
+            foreach ($result->getItems() as $brand) {
                 $newLine = $i != 0 ? '<br>' : '';
                 $this->options[] = [
-                    "value" => $post->getId(),
-                    "label" =>  $newLine.$post->getTitle()
+                    "value" => $brand->getId(),
+                    "label" =>  $newLine.$brand->getTitle()
                 ];
                 $i++;
             }
