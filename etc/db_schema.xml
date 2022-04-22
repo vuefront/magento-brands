@@ -23,9 +23,9 @@
             <column name="brand_id" />
             <column name="product_id"/>
         </constraint>
-        <index referenceId="IDX_BRANDS_BRAND_PRODUCT_ID" indexType="hash">
+        <constraint xsi:type="unique" referenceId="IDX_BRANDS_BRAND_PRODUCT_ID">
             <column name="product_id"/>
-        </index>
+        </constraint>
         <constraint xsi:type="foreign" referenceId="vuefront_brands_brand_product_foreign_product_id" table="vuefront_brands_brand_product" column="product_id" referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
         <constraint xsi:type="foreign" referenceId="vuefront_brands_brand_product_foreign_brand_id" table="vuefront_brands_brand_product" column="brand_id" referenceTable="vuefront_brands_brand" referenceColumn="brand_id" onDelete="CASCADE"/>
     </table>
