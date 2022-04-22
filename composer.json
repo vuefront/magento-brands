@@ -2,7 +2,7 @@
   "name": "vuefront/module-brands",
   "description": "Vuefront Brands for magento2",
   "type": "magento2-module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "canonical": false,
   "require": {
     "ext-json": "*"
