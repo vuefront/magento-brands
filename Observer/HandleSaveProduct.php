@@ -32,6 +32,9 @@ class HandleSaveProduct implements ObserverInterface
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
         $params = $this->request->getParams();
+        if (!isset($params['vfbrands'])) {
+            return;
+        }
         $brandData = $params['vfbrands'];
         $_product = $observer->getProduct();  // you will get product object
         $product_id = (int)$_product->getId(); // for product id
